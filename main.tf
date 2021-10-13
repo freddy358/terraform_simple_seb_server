@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "my_webserver" {
-  ami                    = "ami-074cce78125f09d61"
+  ami                    = "ami-013a129d325529d4d"
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.webserver.id]
   user_data              = <<EOF
