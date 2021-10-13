@@ -24,7 +24,7 @@ EOF
 
 
 resource "aws_security_group" "webserver" {
-  name        = "WebServer Security Group"
+  name        = "WebServer SG"
   description = "Security Group for web server"
 
   ingress {
