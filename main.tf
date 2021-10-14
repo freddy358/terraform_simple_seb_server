@@ -3,8 +3,8 @@ resource "aws_instance" "my_webserver" {
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.webserver.id]
   user_data              = templatefile("user_data.sh.tpl",{
-    f_name = Farid,
-    l_name = Bakhishli,
+    f_name = "Farid",
+    l_name = "Bakhishli",
     members = ["Babak","Gasham","Nihad","and others=)"]
   })
 
