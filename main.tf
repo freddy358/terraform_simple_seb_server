@@ -1,15 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket = "farid-terraform-state-files"
-    key    = "terraform/webserver-state"
-    region = "us-west-2"
-  }
-}
-
-provider "aws" {
-  region = "us-west-2"
-}
-
 resource "aws_instance" "my_webserver" {
   ami                    = "ami-013a129d325529d4d"
   instance_type          = "t3.micro"
