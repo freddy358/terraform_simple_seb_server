@@ -2,7 +2,11 @@ resource "aws_instance" "my_webserver" {
   ami                    = "ami-013a129d325529d4d"
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.webserver.id]
-  user_data              = file("user_data.sh")
+  user_data              = templatefile("user_data.sh.tpl",{
+    f_name = Farid,
+    l_name = Bakhishli,
+    members = ["Babak","Gasham","Nihad","and others=)"]
+  })
 
   tags = {
     Name  = "Web Server Build by Terraform"
