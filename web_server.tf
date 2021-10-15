@@ -5,8 +5,17 @@ resource "aws_eip" "my_static_ip" {
   }
 }
 
+data "aws_ami" "latest_amazon_linux" {
+	owners      = ["amazon"]
+	most_recent = true
+	filer {
+	name   = "name"
+	value  = ["amzn2-ami-hvm-*-x86_64-gp2"]
+	}
+}
+
 resource "aws_instance" "my_webserver" {
-  ami                    = "ami-013a129d325529d4d"
+  ami                    = data.aws_ami.latest_amazon_linux.id
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.webserver.id]
   user_data              = templatefile("user_data.sh.tpl",{
@@ -31,7 +40,7 @@ resource "aws_instance" "my_webserver" {
 }
 
 resource "aws_instance" "my_db_server" {
-  ami                    = "ami-013a129d325529d4d"
+  ami                    = data.aws_ami.latest_amazon_linux.id
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.webserver.id]
 
