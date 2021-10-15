@@ -8,7 +8,7 @@ resource "aws_eip" "my_static_ip" {
 data "aws_ami" "latest_amazon_linux" {
 	owners      = ["amazon"]
 	most_recent = true
-	filer {
+	filter {
 	name   = "name"
 	value  = ["amzn2-ami-hvm-*-x86_64-gp2"]
 	}
