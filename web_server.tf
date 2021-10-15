@@ -20,9 +20,26 @@ resource "aws_instance" "my_webserver" {
     Owner = "Farid Bakhishli"
   }
 
+  depends_on = [
+    aws_instance.my_db_server
+  ]
+
   lifecycle {
     create_before_destroy = true
   }
+
+}
+
+resource "aws_instance" "my_db_server" {
+  ami                    = "ami-013a129d325529d4d"
+  instance_type          = "t3.micro"
+  vpc_security_group_ids = [aws_security_group.webserver.id]
+
+  tags = {
+    Name  = "Web Server Build by Terraform"
+    Owner = "Farid Bakhishli"
+  }
+  
 }
 
 resource "aws_security_group" "webserver" {
