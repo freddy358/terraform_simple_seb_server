@@ -19,18 +19,14 @@ resource "aws_security_group" "webserver" {
   name        = "WebServer SG"
   description = "Security Group for web server"
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  dynamic "ingress" {
+    for_each = ["80", "443"]
+    content {
+      from_port = dynamic.value
+      to_port   = dynamic.value
+      protocol  = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 
   egress {
