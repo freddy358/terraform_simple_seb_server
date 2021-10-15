@@ -5,15 +5,6 @@ resource "aws_eip" "my_static_ip" {
   }
 }
 
-data "aws_ami" "latest_amazon_linux" {
-	owners      = ["amazon"]
-	most_recent = true
-	filter {
-	name   = "name"
-	values  = ["amzn2-ami-hvm-*-x86_64-gp2"]
-	}
-}
-
 resource "aws_instance" "my_webserver" {
   ami                    = data.aws_ami.latest_amazon_linux.id
   instance_type          = "t3.micro"
